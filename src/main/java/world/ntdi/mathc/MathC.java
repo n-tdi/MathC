@@ -10,8 +10,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Date;
-
 public final class MathC extends JavaPlugin implements Listener {
 
     public static MathC instance;
@@ -59,9 +57,18 @@ public final class MathC extends JavaPlugin implements Listener {
                         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.BLUE + "MathC" + ChatColor.GRAY + "] " + ChatColor.translateAlternateColorCodes('&', configFile.getString("question").replace("%x%", String.valueOf(x)).replace("%y%", String.valueOf(y)).replace("%sign%", "+")));
                     }
                     acceptingSolutions = true;
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            if (acceptingSolutions) {
+                                acceptingSolutions = false;
+                                Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.BLUE + "MathC" + ChatColor.GRAY + "] " + ChatColor.translateAlternateColorCodes('&', configFile.getString("time-limit-exceeded").replace("%answer%", String.valueOf(answer))));
+                            }
+                        }
+                    }.runTaskLater(MathC.getInstance(), (long) configFile.getInt("time-limit")*20);
                 }
             }
-        }.runTaskTimer(this, (long) configFile.getInt("interval")*60*20, (long) configFile.getInt("interval")*60*20);
+        }.runTaskTimer(this, (long) (configFile.getInt("interval"))*20, (long) (configFile.getInt("interval"))*20);
     }
 
     @Override
@@ -75,6 +82,20 @@ public final class MathC extends JavaPlugin implements Listener {
     public void initConfig(){
         configFile.options().copyDefaults(true);
         this.saveConfig();
+    }
+
+    public void timeLimitTimer() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (acceptingSolutions) {
+                    if (System.currentTimeMillis() - startTime > (long) configFile.getInt("time-limit")*60*1000) {
+                        acceptingSolutions = false;
+                        Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.BLUE + "MathC" + ChatColor.GRAY + "] " + ChatColor.translateAlternateColorCodes('&', configFile.getString("time-limit-exceeded").replace("%answer%", String.valueOf(answer))));
+                    }
+                }
+            }
+        }.runTaskLater(this, 20);
     }
 
     @EventHandler
