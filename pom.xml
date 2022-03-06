@@ -63,10 +63,6 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>redempt.dev</id>
-            <url>https://redempt.dev</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -75,12 +71,6 @@
             <artifactId>spigot-api</artifactId>
             <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.Redempt</groupId>
-            <artifactId>RedLib</artifactId>
-            <version>6.5.1.9</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

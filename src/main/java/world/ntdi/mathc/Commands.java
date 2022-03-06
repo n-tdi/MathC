@@ -1,30 +1,41 @@
 package world.ntdi.mathc;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import redempt.redlib.commandmanager.CommandHook;
 
-public class Commands {
-    @CommandHook("enable")
-    public void enablecmd(CommandSender sender){
-        if (MathC.enabled) {
-            sender.sendMessage(ChatColor.GOLD + "MathC is already enabled!");
-        } else {
-            MathC.enabled = true;
-            sender.sendMessage(ChatColor.GREEN + "MathC has been enabled!");
+public class Commands implements CommandExecutor {
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (sender.hasPermission("mathc.use")) {
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("enable")) {
+                    if (MathC.enabled) {
+                        sender.sendMessage(ChatColor.GOLD + "MathC is already enabled!");
+                    } else {
+                        MathC.enabled = true;
+                        sender.sendMessage(ChatColor.GREEN + "MathC has been enabled!");
+                    }
+                } else if (args[0].equalsIgnoreCase("disable")) {
+                    if (!MathC.enabled) {
+                        sender.sendMessage(ChatColor.GOLD + "MathC is already disabled!");
+                    } else {
+                        MathC.enabled = false;
+                        sender.sendMessage(ChatColor.RED + "MathC has been disabled!");
+                    }
+                } else {
+                    sendHelp(sender);
+                }
+            } else {
+                sendHelp(sender);
+            }
         }
+        return true;
     }
-    @CommandHook("disable")
-    public void disblaecmd(CommandSender sender){
-        if (!MathC.enabled) {
-            sender.sendMessage(ChatColor.GOLD + "MathC is already disabled!");
-        } else {
-            MathC.enabled = false;
-            sender.sendMessage(ChatColor.RED + "MathC has been disabled!");
-        }
-    }
-    @CommandHook("help")
-    public void helpcmd(CommandSender sender){
+
+    public void sendHelp (CommandSender sender){
         sender.sendMessage("");
         sender.sendMessage(ChatColor.BLUE + "Math" + ChatColor.DARK_BLUE + "C " + ChatColor.GOLD + "Help");
         sender.sendMessage(ChatColor.RED + "enable" + ChatColor.GOLD + " - Enables MathC");

@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import redempt.redlib.commandmanager.CommandParser;
 
 import java.util.Date;
 
@@ -29,7 +28,7 @@ public final class MathC extends JavaPlugin implements Listener {
         Bukkit.getLogger().info("MathC has been enabled!");
         instance = this;
 
-        new CommandParser(this.getResource("command.rdcml")).parse().register("mathc", this, new Commands());
+        getCommand("mathc").setExecutor(new Commands());
         getServer().getPluginManager().registerEvents(this, this);
 
         configFile = this.getConfig();

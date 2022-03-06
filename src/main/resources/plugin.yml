@@ -6,4 +6,10 @@ prefix: [ MathC ]
 authors: [ Ntdi ]
 description: Answer math questions in chat!
 website: ntdi.world
-
+commands:
+  mathc:
+    permission: mathc.use
+    aliases: [ mc ]
+    usage: /mathc <enable | disable>
+    description: Enable or disable MathC
+    permission-message: You do not have "mathc.use" permission!
