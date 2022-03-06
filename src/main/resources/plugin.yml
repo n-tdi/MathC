@@ -1,7 +1,7 @@
 name: MathC
 version: '${project.version}'
 main: world.ntdi.mathc.MathC
-api-version: 1.18
+api-version: 1.13
 prefix: MathC
 authors: [ Ntdi ]
 description: Answer math questions in chat!
