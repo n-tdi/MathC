@@ -43,9 +43,9 @@ public final class MathC extends JavaPlugin implements Listener {
             public void run() {
                 if (enabled) {
                     startTime = System.currentTimeMillis();
-                    int sign = (int) Math.floor(Math.random() * (3-1+1)+1);
-                    int x = (int)Math.floor(Math.random()*(max-min+1)+min);
-                    int y = (int)Math.floor(Math.random()*(max-min+1)+min);
+                    int sign = (int) (Math.random() * (3-1+1)+1);
+                    int x    = (int) (Math.random()*(max-min+1)+min);
+                    int y    = (int) (Math.random()*(max-min+1)+min);
                     if (sign == 2) {
                         answer = x - y;
                         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.BLUE + "MathC" + ChatColor.GRAY + "] " + ChatColor.translateAlternateColorCodes('&', configFile.getString("question").replace("%x%", String.valueOf(x)).replace("%y%", String.valueOf(y)).replace("%sign%", "-")));
