@@ -1,0 +1,14 @@
+mathc,mc {
+    permission mathc.use
+    help <disable | enable | help>
+    disable {
+        hook disable
+    }
+    enable {
+        hook enable
+    }
+    help {
+        hook help
+    }
+
+}

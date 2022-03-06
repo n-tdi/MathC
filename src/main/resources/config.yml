@@ -1,0 +1,9 @@
+# In order for the config to work, you must stop the server to change the config.
+min: 1
+max: 100
+
+#minutes between each new question
+interval: 1
+
+question: "&6New Question: &c%x% %sign% %y% &6=&c ?"
+answer: "&c%player% &6has solved the question! The answer was: &c%answer%"

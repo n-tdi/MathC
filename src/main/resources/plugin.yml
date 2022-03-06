@@ -1,0 +1,9 @@
+name: MathC
+version: '${project.version}'
+main: world.ntdi.mathc.MathC
+api-version: 1.18
+prefix: [ MathC ]
+authors: [ Ntdi ]
+description: Answer math questions in chat!
+website: ntdi.world
+
