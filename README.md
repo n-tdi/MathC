@@ -5,6 +5,6 @@ Math in chat plugin for minecraft
 Either build the plugin yourself or get it from the spigotmc page.
 
 ## Dependencies
-This plugin relies on [RedLib[(https://github.com/Redempt/RedLib) for commands.
+This plugin relies on [RedLib[(https://github.com/Redempt/RedLib "RedLib") for commands.
 
 Other than that have fun!
