@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import redempt.redlib.commandmanager.CommandParser;
 
+import java.util.Date;
+
 public final class MathC extends JavaPlugin implements Listener {
 
     public static MathC instance;
@@ -19,6 +21,7 @@ public final class MathC extends JavaPlugin implements Listener {
     public static boolean enabled;
     public static boolean acceptingSolutions;
     public static int answer;
+    public static Long startTime;
 
     @Override
     public void onEnable() {
@@ -42,6 +45,7 @@ public final class MathC extends JavaPlugin implements Listener {
             @Override
             public void run() {
                 if (enabled) {
+                    startTime = System.currentTimeMillis();
                     int sign = (int) Math.floor(Math.random() * (3-1+1)+1);
                     int x = (int)Math.floor(Math.random()*(max-min+1)+min);
                     int y = (int)Math.floor(Math.random()*(max-min+1)+min);
@@ -79,7 +83,9 @@ public final class MathC extends JavaPlugin implements Listener {
         if (acceptingSolutions) {
             int msg = Integer.parseInt(e.getMessage());
             if (msg == answer) {
-                Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.BLUE + "MathC" + ChatColor.GRAY + "] " + ChatColor.translateAlternateColorCodes('&', configFile.getString("answer").replace("%player%", e.getPlayer().getName()).replace("%answer%", String.valueOf(answer))));
+                long time = (System.currentTimeMillis() - startTime)/1000;
+                
+                Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.BLUE + "MathC" + ChatColor.GRAY + "] " + ChatColor.translateAlternateColorCodes('&', configFile.getString("answer").replace("%player%", e.getPlayer().getName()).replace("%time%", String.valueOf(time)).replace("%answer%", String.valueOf(answer))));
                 e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 e.setCancelled(true);
                 acceptingSolutions = false;

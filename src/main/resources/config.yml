@@ -6,4 +6,4 @@ max: 100
 interval: 1
 
 question: "&6New Question: &c%x% %sign% %y% &6=&c ?"
-answer: "&c%player% &6has solved the question! The answer was: &c%answer%"
+answer: "&c%player% &6has solved the question in &c%time%s&6! The answer was: &c%answer%"
